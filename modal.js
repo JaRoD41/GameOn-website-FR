@@ -23,7 +23,7 @@ function launchModal() {
 
 // close modal form
 function closeModal() {
-  modalbg.style.display = "none";
+  modalbg.style.display = "none"; // passage en display:none au clic sur la X
 }
 
 // close modal event
