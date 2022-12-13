@@ -28,3 +28,7 @@ function closeModal() {
 
 // close modal event
 closeBtn.forEach((btn) => btn.addEventListener("click", closeModal)); // fermeture du formulaire au clic sur le X
+
+
+// Gestion du formulaire et des validations de champs
+
