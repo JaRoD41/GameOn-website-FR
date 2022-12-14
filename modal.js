@@ -32,3 +32,18 @@ closeBtn.forEach((btn) => btn.addEventListener("click", closeModal)); // fermetu
 
 // Gestion du formulaire et des validations de champs
 
+// déclaration des différentes zones d'input et de messages d'erreur //
+
+const firstInput = document.getElementById("first")
+const lastInput = document.getElementById("last")
+const emailInput = document.getElementById("email")
+const birthdateInput = document.getElementById('birthdate')
+const quantityInput = document.getElementById("quantity")
+const checkbox1Input = document.getElementById('checkbox1')
+
+const zoneFirstErrorMsg = document.querySelector('#firstErrorMsg')
+const zoneLastErrorMsg = document.querySelector('#lastErrorMsg')
+const zoneEmailErrorMsg = document.querySelector('#emailErrorMsg')
+const zoneBirthdateErrorMsg = document.querySelector('#birthdateErrorMsg')
+const zoneQuantityErrorMsg = document.querySelector('#quantityErrorMsg')
+const zoneCheckboxErrorMsg = document.querySelector('#checkboxErrorMsg')
