@@ -442,7 +442,7 @@ input[data-error]::after {
 }
 
 .hero-section {
-  /* min-height: 93vh; */
+  /* min-height: 93vh; suppression de cette valeur de hauteur qui déforme la modale en hauteur inutilement */
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -511,21 +511,50 @@ input[data-error]::after {
   /* ajout de l'object-fit:cover pour toujours conserver les proportions de l'image en responsive */
 }
 
+/* ======================== fenêtre de remerciements ========================================= */
+
+.thanksBground {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(26, 39, 156, 0.4);
+}
+
+.thanksContainer {
+  margin: 5% auto;
+  width: 100%;
+  max-width: 500px;
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
+  background: #232323;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  padding-top: 10px;
+}
+
+.thanksBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto 50px;
+}
+
 .thanksMessage {
-  position: absolute;
-  width: 271px;
-  height: 102px;
-  left: 585px;
-  top: 448px;
   font-family: 'DM Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 36px;
   line-height: 142.6%;
-  display: flex;
-  align-items: center;
   text-align: center;
-  color: #FFFFFF;
+  color: #fff;
 }
 
 .copyrights {

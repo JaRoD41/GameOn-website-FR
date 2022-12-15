@@ -50,6 +50,9 @@ const zoneCheckboxErrorMsg = document.querySelector('#checkboxErrorMsg')
 // recupération des inputs du formulaire
 
 //* ******************** afficher les messages d'erreur  ***********************************/
+
+let message = "test"
+
 // clear validation message
 function clearValidationMessage(element) {
 	element.setAttribute('data-error-visible', 'false')
@@ -61,3 +64,4 @@ function setValidationMessage(element, message) {
 	element.setAttribute('data-error-visible', 'true')
 	element.setAttribute('data-error', message)
 }
+
