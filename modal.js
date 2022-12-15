@@ -39,6 +39,7 @@ const emailInput = document.getElementById('email')
 const birthdateInput = document.getElementById('birthdate')
 const quantityInput = document.getElementById('quantity')
 const checkbox1Input = document.getElementById('checkbox1')
+const formSubmit = document.getElementById('formSubmitBtn')
 
 const zoneFirstErrorMsg = document.querySelector('#firstErrorMsg')
 const zoneLastErrorMsg = document.querySelector('#lastErrorMsg')
@@ -49,10 +50,17 @@ const zoneCheckboxErrorMsg = document.querySelector('#checkboxErrorMsg')
 
 // recupération des inputs du formulaire
 
-//* ******************** afficher les messages d'erreur  ***********************************/
+const firstCheck = firstInput.value
+const message = 'test'
 
-let message = "test"
+formSubmit.addEventListener('submit', function (e) {
+	setValidationMessage(e, message)
+	e.preventDefault()
+})
 
+//********************* affichage des messages d'erreur  ***********************************/
+
+console.log(firstInput.value)
 // clear validation message
 function clearValidationMessage(element) {
 	element.setAttribute('data-error-visible', 'false')
@@ -64,4 +72,3 @@ function setValidationMessage(element, message) {
 	element.setAttribute('data-error-visible', 'true')
 	element.setAttribute('data-error', message)
 }
-
