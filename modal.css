@@ -511,6 +511,23 @@ input[data-error]::after {
   /* ajout de l'object-fit:cover pour toujours conserver les proportions de l'image en responsive */
 }
 
+.thanksMessage {
+  position: absolute;
+  width: 271px;
+  height: 102px;
+  left: 585px;
+  top: 448px;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 142.6%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+}
+
 .copyrights {
   color: #fe142f;
   padding: 0;
