@@ -29,61 +29,20 @@ function closeModal() {
 // close modal event
 closeBtn.forEach((btn) => btn.addEventListener('click', closeModal)) // fermeture du formulaire au clic sur le X
 
-// Gestion du formulaire et des validations de champs
-
-// déclaration des différentes zones d'input et de messages d'erreur //
-
-const firstInput = document.getElementById('first')
-const lastInput = document.getElementById('last')
-const emailInput = document.getElementById('email')
-const birthdateInput = document.getElementById('birthdate')
-const quantityInput = document.getElementById('quantity')
-const checkbox1Input = document.getElementById('checkbox1')
-const formSubmit = document.getElementById('formSubmitBtn')
-
-const zoneFirstErrorMsg = document.querySelector('#firstErrorMsg')
-const zoneLastErrorMsg = document.querySelector('#lastErrorMsg')
-const zoneEmailErrorMsg = document.querySelector('#emailErrorMsg')
-const zoneBirthdateErrorMsg = document.querySelector('#birthdateErrorMsg')
-const zoneQuantityErrorMsg = document.querySelector('#quantityErrorMsg')
-const zoneCheckboxErrorMsg = document.querySelector('#checkboxErrorMsg')
-
-// recupération des inputs du formulaire
-
-const firstCheck = firstInput.value
-const message = 'test'
-
-formSubmit.addEventListener('submit', function (e) {
-	setValidationMessage(e, message)
-	e.preventDefault()
-})
+// Gestion du formulaire et des validations des champs
 
 //********************* affichage des messages d'erreur  ***********************************/
-
-// clear validation message
-// function clearValidationMessage(element) {
-// 	element.setAttribute('data-error-visible', 'false')
-// 	element.setAttribute('data-error', '')
-// }
-
-// set validation message
-// function setValidationMessage(element, message) {
-// 	element.setAttribute('data-error-visible', 'true')
-// 	element.setAttribute('data-error', message)
-// }
 
 const form = document.querySelector('form[name="reserve"]')
 const field = form.querySelectorAll('.text-control')
 
 function validateField(field) {
-	// Récupération de la valeur du champ
+	// Récupération de la valeur du champ en supprimant les espaces éventuellement présents
 	const value = field.value.trim()
 
 	// Récupération du conteneur parent du champ
 	const container = field.closest('.formData')
 
-	// Get the error message element
-	const errorMessage = container.querySelector('.error-message')
 
 	// Initialisation de la variable de validité à true
 	let isValid = true
@@ -102,7 +61,7 @@ function validateField(field) {
 	if (field.type === 'email' && !value.includes('@')) {
 		container.setAttribute(
 			'data-error',
-			'Le champ doit contenir une adresse e-mail valide'
+			'Le champ doit contenir une adresse e-mail valide. Exemple : contact@nom.com'
 		)
 		container.setAttribute('data-error-visible', true)
 		isValid = false
