@@ -43,11 +43,10 @@ function validateField(field) {
 	// Récupération du conteneur parent du champ
 	const container = field.closest('.formData')
 
-
 	// Initialisation de la variable de validité à true
 	let isValid = true
 
-	// Vérification de la longueur de la valeur du champ
+	// Vérification de la longueur de la valeur du champ et ajout de la classe et du message d'erreur si incorrect
 	if (value.length < 2) {
 		container.setAttribute(
 			'data-error',
@@ -76,6 +75,7 @@ function validateField(field) {
 	return isValid
 }
 
+// écoute les changements dans les champs du formulaire
 form.addEventListener('change', (event) => {
 	event.preventDefault()
 
