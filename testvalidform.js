@@ -14,8 +14,6 @@ const regexLastName = regexFirstName
 const regexEmail =
 	/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/
 
-
-
 // écoute du clic sur le bouton COMMANDER //
 
 const formSubmitButton = document.getElementById('formSubmitBtn')
@@ -33,18 +31,18 @@ formSubmitButton.addEventListener('click', function (e) {
 
 	// mise en place des conditions de validation des champs du formulaire //
 
-  // mise en place d'une vérification d'âge minimum de participation
+	// mise en place d'une vérification d'âge minimum de participation de 15 ans
 
-  const minimumAge = 15
+	const minimumAge = 15
 	const today = new Date()
 	const birthDate = new Date(birthCheckValue)
-	const ageInMilliseconds = Date.now() - birthDate.getTime()
 	let ageInYears = today.getFullYear() - birthDate.getFullYear()
 
 	if (
 		today.getMonth() < birthDate.getMonth() ||
 		(today.getMonth() == birthDate.getMonth() &&
 			today.getDate() < birthDate.getDate())
+		// si le mois en cours est inférieur au mois de naissance ou que le mois de naissance === mois en cours && le jour actuel < au jour de naissance, alors on diminue le nombre d'années de l'âge de 1
 	) {
 		ageInYears--
 	}
@@ -57,46 +55,70 @@ formSubmitButton.addEventListener('click', function (e) {
 			regexFirstName.test(firstCheckValue) == false ||
 			firstCheckValue === null
 		) {
-			zoneFirstNameErrorMsg.innerHTML = 'Merci de renseigner un prénom valide'
+			firstCheck
+				.closest('.formData')
+				.setAttribute('data-error', 'Merci de renseigner un prénom valide')
 			return false
 			// test du champ nom //
 		} else if (
 			regexLastName.test(lastCheckValue) == false ||
 			lastCheckValue === null
 		) {
-			zoneLastNameErrorMsg.innerHTML =
-				'Merci de renseigner un nom de famille valide'
+			lastCheck
+				.closest('.formData')
+				.setAttribute(
+					'data-error',
+					'Merci de renseigner un nom de famille valide'
+				)
 			return false
 			// test du champ email //
 		} else if (
 			regexEmail.test(emailCheckValue) == false ||
 			emailCheckValue === null
 		) {
-			zoneAddressErrorMsg.innerHTML =
-				'Merci de renseigner une adresse email valide'
+			emailCheck
+				.closest('.formData')
+				.setAttribute(
+					'data-error',
+					'Merci de renseigner une adresse email valide'
+				)
 			return false
 			// test du champ date de naissance (si champ vide) //
 		} else if (birthCheckValue === null) {
-			console.log('Merci de renseigner votre date de naissance !')
-			return false
-			// test du champ date de naissance (si âge requis OK) //
-		} else if (ageInYears >= minimumAge) {
-			console.log("youpi ! vous avez l'âge requis !!!")
+			birthCheck
+				.closest('.formData')
+				.setAttribute(
+					'data-error',
+					'Merci de renseigner votre date de naissance'
+				)
 			return false
 			// test du champ date de naissance (si trop jeune pour participer) //
 		} else if (ageInYears < minimumAge) {
-			console.log('Trop jeune ! rentre chez ta maman !')
+			birthCheck
+				.closest('.formData')
+				.setAttribute(
+					'data-error',
+					"Désolé, l'âge minimum requis est de 15 ans"
+				)
 			return false
-
-      
-		} else if (regexEmail.test(checkEmail) == false || checkEmail === null) {
-			zoneEmailErrorMsg.innerHTML =
-				'Merci de renseigner une adresse email valide'
+			// test du champ quantité doit être un NOMBRE compris entre 0 et 99 //
+		} else if (
+			quantityCheckValue < 0 ||
+			quantityCheckValue > 99 ||
+			isNaN(quantityCheckValue) == true ||
+			quantityCheckValue === null
+		) {
+			quantityCheck
+				.closest('.formData')
+				.setAttribute(
+					'data-error',
+					'Merci de renseigner un nombre compris entre 0 et 99'
+				)
 			return false
 		}
 		// si tous les champs du formulaire sont correctement remplis //
 		else {
-			// on crée un objet contact pour l'envoi par l'API //
+			// on valide le formulaire et on affiche la page de remerciement //
 
 			console.log('TOUT EST OK !! YOUPIIIIII !!')
 		}
