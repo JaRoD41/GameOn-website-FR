@@ -33,30 +33,37 @@ closeBtn.forEach((btn) => btn.addEventListener('click', closeModal)) // fermetur
 
 //********************* affichage des messages d'erreur  ***********************************/
 
-const form = document.querySelector('form[name="reserve"]')
-const field = form.querySelectorAll('.text-control')
+// déclaration des différentes zones d'input et de messages d'erreur //
 
-// écoute les changements dans les champs du formulaire
-form.addEventListener('change', (event) => {
-	event.preventDefault()
+const firstCheck = document.getElementById('first')
+const lastCheck = document.getElementById('last')
+const emailCheck = document.getElementById('email')
+const birthCheck = document.getElementById('birthdate')
+const quantityCheck = document.getElementById('quantity')
+const boxCheck = document.getElementById('checkbox1')
 
-	// récupère le champs de formulaire concerné
-	const currentField = event.target
-	console.log('current field: ', currentField)
+const zoneFirstErrorMsg = document.querySelector('#firstError')
+const zoneLastErrorMsg = document.querySelector('#lastError')
+const zoneEmailErrorMsg = document.querySelector('#emailError')
+const zoneBirthErrorMsg = document.querySelector('#birthError')
+const zoneQuantityErrorMsg = document.querySelector('#quantityError')
+const zoneBoxCheckErrorMsg = document.querySelector('#boxCheckError')
 
-	// valide le champs en cours
-	validateField(currentField)
-})
+// déclaration des regex de contrôle des inputs du formulaire //
 
-function validateField(field) {
-	// Récupération de la valeur du champ en supprimant les espaces éventuellement présents
+const regexFirstName = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
+const regexLastName = regexFirstName
+const regexEmail =
+	/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/
 
-	let firstCheck = document.getElementById('first')
-	let lastCheck = document.getElementById('last')
-	let emailCheck = document.getElementById('email')
-	let birthCheck = document.getElementById('birthdate')
-	let quantityCheck = document.getElementById('quantity')
-	let boxCheck = document.getElementById('checkbox1')
+// écoute du clic sur le bouton COMMANDER //
+
+const formSubmitButton = document.getElementById('formSubmitBtn')
+
+formSubmitButton.addEventListener('click', function (e) {
+	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
+
+	// recupération des inputs du formulaire //
 
 	let firstCheckValue = document.getElementById('first').value.trim()
 	let lastCheckValue = document.getElementById('last').value.trim()
@@ -64,89 +71,98 @@ function validateField(field) {
 	let birthCheckValue = document.getElementById('birthdate').value
 	let quantityCheckValue = document.getElementById('quantity').value.trim()
 
-	const regexFirstName = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
-	const regexLastName = regexFirstName
+	// mise en place des conditions de validation des champs du formulaire //
+
+	// mise en place d'une vérification d'âge minimum de participation de 15 ans
 
 	const minimumAge = 15
 	const today = new Date()
 	const birthDate = new Date(birthCheckValue)
-	const ageInMilliseconds = Date.now() - birthDate.getTime()
 	let ageInYears = today.getFullYear() - birthDate.getFullYear()
-
 
 	if (
 		today.getMonth() < birthDate.getMonth() ||
 		(today.getMonth() == birthDate.getMonth() &&
 			today.getDate() < birthDate.getDate())
+		// si le mois en cours est inférieur au mois de naissance ou que le mois de naissance === mois en cours && le jour actuel < au jour de naissance, alors on diminue le nombre d'années de l'âge de 1
 	) {
 		ageInYears--
 	}
-	// const value = firstCheck.value.trim()
+
+	// si une erreur est trouvée, un message est retourné et la valeur false également //
 
 	// Récupération du conteneur parent du champ
-	const container = field.closest('.formData')
+	const form = document.querySelector('form[name="reserve"]')
+	const field = form.querySelectorAll('.text-control')
+	// const container = field.closest('.formData')
 
-	// Initialisation de la variable de validité à true
-	let isValid = true
-
-	// Vérification de la longueur de la valeur du champ et ajout de la classe et du message d'erreur si incorrect
-	if (firstCheckValue.length < 2) {
-		firstCheck
-			.closest('.formData')
-			.setAttribute(
-				'data-error',
-				'Le champ doit contenir au moins 2 caractères'
-			)
-		firstCheck.closest('.formData').setAttribute('data-error-visible', true)
-
-		isValid = false
+	// test du champ prénom //
+	function firstValidation() {
+		if (
+			firstCheckValue.length < 2 ||
+			firstCheckValue === '' ||
+			!firstCheckValue.match(regexFirstName)
+		) {
+			console.log('Merci de renseigner un prénom valide')
+			return false
+		}
+		console.log('Merci de renseigner un prénom valide')
+		return false
 	}
 
-	if (lastCheckValue.length < 2) {
-		lastCheck
-			.closest('.formData')
-			.setAttribute(
-				'data-error',
-				'Le champ doit contenir au moins 2 caractères'
-			)
-		lastCheck.closest('.formData').setAttribute('data-error-visible', true)
-		isValid = false
+	// test du champ nom //
+	function lastValidation() {
+		if (
+			lastCheckValue.length < 2 ||
+			lastCheckValue === '' ||
+			!lastCheckValue.match(regexLastName)
+		) {
+			console.log('Merci de renseigner un nom de famille valide')
+			return false
+		}
 	}
 
-	// Vérification du format de l'adresse e-mail
-	if (field.type === 'email' && !emailCheckValue.includes('@')) {
-		emailCheck
-			.closest('.formData')
-			.setAttribute(
-				'data-error',
-				'Le champ doit contenir une adresse e-mail valide. Exemple : contact@nom.com'
-			)
-		emailCheck.closest('.formData').setAttribute('data-error-visible', true)
-		isValid = false
-	}
-	if (field.type === 'email' && !emailCheckValue.includes('@')) {
-		emailCheck
-			.closest('.formData')
-			.setAttribute(
-				'data-error',
-				'Le champ doit contenir une adresse e-mail valide. Exemple : contact@nom.com'
-			)
-		emailCheck.closest('.formData').setAttribute('data-error-visible', true)
-		isValid = false
+	// test du champ email //
+	function emailValidation() {
+		if (emailCheckValue === '' || !emailCheckValue.match(regexEmail)) {
+			console.log('Merci de renseigner un email valide')
+			return false
+		}
 	}
 
-	if (ageInYears >= minimumAge) {
-		console.log("youpi ! vous avez l'âge requis !!!")
-	} else {
-		console.log("Trop jeune ! rentre chez ta maman !")
+	function birthValidation() {
+		// test du champ date de naissance (si champ vide) //
+		if (birthCheckValue === null) {
+			console.log('Merci de renseigner votre date de naissance')
+
+			return false
+		}
+		// test du champ date de naissance (si trop jeune pour participer) //
+		if (ageInYears < minimumAge) {
+			console.log("Désolé, l'âge minimum requis est de 15 ans")
+		}
 	}
 
-	// Si le champ est valide, suppression de la classe d'erreur et de la classe de style d'erreur visible
+	// test du champ quantité doit être un NOMBRE compris entre 0 et 99 //
+	function quantityValidation() {}
+	if (
+		quantityCheckValue < 0 ||
+		quantityCheckValue > 99 ||
+		isNaN(quantityCheckValue) == true ||
+		quantityCheckValue === null
+	) {
+		console.log('Merci de renseigner un nombre compris entre 0 et 99')
+
+		return false
+	}
+
 	if (isValid) {
-		container.removeAttribute('data-error')
-		container.setAttribute('data-error-visible', false)
+		// container.removeAttribute('data-error')
+		// container.setAttribute('data-error-visible', false)
+		console.log('TOUT EST OK !! YOUPIIIIII !!')
 	}
-	console.log('date naissance: ', birthCheckValue)
-	console.log("aujourd'hui: ", today)
+
 	return isValid
-}
+
+	formValidation()
+})
