@@ -512,6 +512,17 @@ input {
   /* ajout de l'object-fit:cover pour toujours conserver les proportions de l'image en responsive */
 }
 
+#firstError, #lastError, #emailError, #birthError, #quantityError, #boxCheckError {
+  font-size: 10px;
+  color: #e54858;
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: left;
+  line-height: 0.3;
+  transition: 0.3s;
+}
+
 /* ======================== fenêtre de remerciements ========================================= */
 
 .thanksBground {
