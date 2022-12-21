@@ -33,14 +33,6 @@ closeBtn.forEach((btn) => btn.addEventListener('click', closeModal)) // fermetur
 
 //********************* affichage des messages d'erreur  ***********************************/
 
-// déclaration des différentes zones d'input et de messages d'erreur //
-
-const quantityCheck = document.getElementById('quantity')
-const boxCheck = document.getElementById('checkbox1')
-
-const zoneQuantityErrorMsg = document.querySelector('#quantityError')
-const zoneBoxCheckErrorMsg = document.querySelector('#boxCheckError')
-
 // Récupération du conteneur parent du champ
 const form = document.querySelector('form[name="reserve"]')
 const field = form.querySelectorAll('.text-control')
@@ -56,7 +48,8 @@ formSubmitButton.addEventListener('click', function (e) {
 	console.log('check email :', emailValidation())
 	console.log('check naissance :', birthValidation())
 	console.log('check quantité :', quantityValidation())
-	// console.log("check prénom :", firstValidation());
+	console.log('check ville :', boxCheckValidation())
+	console.log('check CGV :', acceptValidation())
 
 	// test du champ prénom //
 	function firstValidation() {
@@ -133,7 +126,7 @@ formSubmitButton.addEventListener('click', function (e) {
 			ageInYears--
 		}
 		// test si champ vide //
-		if (birthCheckValue === "") {
+		if (birthCheckValue === '') {
 			zoneBirthErrorMsg.innerHTML = 'Merci de renseigner une date de naissance'
 			birthCheck.style.border = '2px solid #e54858'
 			return false
@@ -153,17 +146,51 @@ formSubmitButton.addEventListener('click', function (e) {
 	// test du champ quantité doit être un NOMBRE compris entre 0 et 99 //
 	function quantityValidation() {
 		let quantityCheckValue = document.getElementById('quantity').value.trim()
+		const quantityCheck = document.getElementById('quantity')
+		const zoneQuantityErrorMsg = document.querySelector('#quantityError')
+
 		if (
 			quantityCheckValue < 0 ||
 			quantityCheckValue > 99 ||
 			isNaN(quantityCheckValue) == true ||
-			quantityCheckValue === null
+			quantityCheckValue === ''
 		) {
-			console.log('Merci de renseigner un nombre compris entre 0 et 99')
+			zoneQuantityErrorMsg.innerHTML =
+				'Merci de renseigner un nombre compris entre 0 et 99'
+			quantityCheck.style.border = '2px solid #e54858'
 			return false
+		} else {
+			zoneQuantityErrorMsg.innerHTML = ''
+			quantityCheck.style.border = ''
+			return true
 		}
-		console.log('ça roule ! quantité valide !')
-		return true
+	}
+
+	// test si une case du choix de la ville est bien cochée //
+	function boxCheckValidation() {
+		const zoneBoxCheckErrorMsg = document.querySelector('#boxCheckError')
+		const boxCheck = document.querySelector('input[name="location"]:checked')
+
+		if (!boxCheck) {
+			zoneBoxCheckErrorMsg.innerHTML = 'Merci de choisir une ville'
+			return false
+		} else {
+			zoneBoxCheckErrorMsg.innerHTML = ''
+			return true
+		}
+	}
+
+	function acceptValidation() {
+		const acceptCheckErrorMsg = document.querySelector('#acceptError')
+		const acceptCheck = document.querySelector('#checkbox1:checked')
+
+		if (!acceptCheck) {
+			acceptCheckErrorMsg.innerHTML = "Merci de lire et accepter les conditions d'utilisation"
+			return false
+		} else {
+			acceptCheckErrorMsg.innerHTML = ''
+			return true
+		}
 	}
 
 	firstValidation()
@@ -171,5 +198,6 @@ formSubmitButton.addEventListener('click', function (e) {
 	emailValidation()
 	birthValidation()
 	quantityValidation()
+	boxCheckValidation()
+	acceptValidation()
 })
-// console.log('TOUT EST OK !! YOUPIIIIII !!')
