@@ -59,6 +59,7 @@ formSubmitButton.addEventListener('click', function (e) {
 			? ''
 			: 'Merci de renseigner un prénom valide'
 		firstCheck.style.border = firstvalid ? '' : '2px solid #e54858'
+		// retourne la valeur de firstvalid true ou false pour le contrôle final
 		return firstvalid
 	}
 
