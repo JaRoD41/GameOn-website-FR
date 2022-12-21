@@ -82,13 +82,16 @@ formSubmitButton.addEventListener('click', function (e) {
 		const lastCheck = document.getElementById('last')
 		const zoneLastErrorMsg = document.querySelector('#lastError')
 		let lastCheckValue = document.getElementById('last').value.trim()
-		const regexLastName = /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/
+		const regexLastName = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
 		if (lastCheckValue.length < 2 || !regexLastName.test(lastCheckValue)) {
-			console.log('Merci de renseigner un nom de famille valide')
+			zoneLastErrorMsg.innerHTML = 'Merci de renseigner un nom valide'
+			lastCheck.style.border = '2px solid #e54858'
 			return false
+		} else {
+			zoneLastErrorMsg.innerHTML = ''
+			lastCheck.style.border = ''
+			return true
 		}
-		console.log('ça roule ! nom valide !')
-		return true
 	}
 
 	// test du champ email //
