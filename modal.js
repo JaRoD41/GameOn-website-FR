@@ -43,13 +43,7 @@ const field = form.querySelectorAll('.text-control')
 const formSubmitButton = document.getElementById('formSubmitBtn')
 formSubmitButton.addEventListener('click', function (e) {
 	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
-	console.log('check prénom :', firstValidation())
-	console.log('check nom :', lastValidation())
-	console.log('check email :', emailValidation())
-	console.log('check naissance :', birthValidation())
-	console.log('check quantité :', quantityValidation())
-	console.log('check ville :', boxCheckValidation())
-	console.log('check CGV :', acceptValidation())
+	areAllValidated() === true ? console.log('tout est validé !') : checkAll()
 
 	// test du champ prénom //
 	function firstValidation() {
@@ -57,15 +51,15 @@ formSubmitButton.addEventListener('click', function (e) {
 		const zoneFirstErrorMsg = document.querySelector('#firstError')
 		let firstCheckValue = document.getElementById('first').value.trim()
 		const regexFirstName = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
-		if (firstCheckValue.length < 2 || !regexFirstName.test(firstCheckValue)) {
-			zoneFirstErrorMsg.innerHTML = 'Merci de renseigner un prénom valide'
-			firstCheck.style.border = '2px solid #e54858'
-			return false
-		} else {
-			zoneFirstErrorMsg.innerHTML = ''
-			firstCheck.style.border = ''
-			return true
-		}
+		// création d'une constante correspondant aux conditions de validation vérifiées
+		const firstvalid =
+			firstCheckValue.length >= 2 && regexFirstName.test(firstCheckValue)
+		// mise en place d'une condition ternaire pour la validation/style du formulaire	
+		zoneFirstErrorMsg.innerHTML = firstvalid
+			? ''
+			: 'Merci de renseigner un prénom valide'
+		firstCheck.style.border = firstvalid ? '' : '2px solid #e54858'
+		return firstvalid
 	}
 
 	// test du champ nom //
@@ -74,15 +68,14 @@ formSubmitButton.addEventListener('click', function (e) {
 		const zoneLastErrorMsg = document.querySelector('#lastError')
 		let lastCheckValue = document.getElementById('last').value.trim()
 		const regexLastName = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
-		if (lastCheckValue.length < 2 || !regexLastName.test(lastCheckValue)) {
-			zoneLastErrorMsg.innerHTML = 'Merci de renseigner un nom valide'
-			lastCheck.style.border = '2px solid #e54858'
-			return false
-		} else {
-			zoneLastErrorMsg.innerHTML = ''
-			lastCheck.style.border = ''
-			return true
-		}
+		const lastvalid =
+			lastCheckValue.length >= 2 && regexLastName.test(lastCheckValue)
+
+		zoneLastErrorMsg.innerHTML = lastvalid
+			? ''
+			: 'Merci de renseigner un nom valide'
+		lastCheck.style.border = lastvalid ? '' : '2px solid #e54858'
+		return lastvalid
 	}
 
 	// test du champ email //
@@ -185,7 +178,8 @@ formSubmitButton.addEventListener('click', function (e) {
 		const acceptCheck = document.querySelector('#checkbox1:checked')
 
 		if (!acceptCheck) {
-			acceptCheckErrorMsg.innerHTML = "Merci de lire et accepter les conditions d'utilisation"
+			acceptCheckErrorMsg.innerHTML =
+				"Merci de lire et accepter les conditions d'utilisation"
 			return false
 		} else {
 			acceptCheckErrorMsg.innerHTML = ''
@@ -193,11 +187,30 @@ formSubmitButton.addEventListener('click', function (e) {
 		}
 	}
 
-	firstValidation()
-	lastValidation()
-	emailValidation()
-	birthValidation()
-	quantityValidation()
-	boxCheckValidation()
-	acceptValidation()
+	// fonction pour appeler toutes les fonctions de contrôle créées
+	function checkAll() {
+		firstValidation()
+		lastValidation()
+		emailValidation()
+		birthValidation()
+		quantityValidation()
+		boxCheckValidation()
+		acceptValidation()
+	}
+
+	// fonction qui vérifie que tous les champs du formulaire sont OK
+	function areAllValidated() {
+		if (
+			firstValidation() === true &&
+			lastValidation() === true &&
+			emailValidation() === true &&
+			birthValidation() === true &&
+			quantityValidation() === true &&
+			boxCheckValidation() === true &&
+			acceptValidation() === true
+		) {
+			return true
+		}
+		return false
+	}
 })
