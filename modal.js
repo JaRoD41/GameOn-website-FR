@@ -35,17 +35,9 @@ closeBtn.forEach((btn) => btn.addEventListener('click', closeModal)) // fermetur
 
 // déclaration des différentes zones d'input et de messages d'erreur //
 
-
-
-const emailCheck = document.getElementById('email')
-const birthCheck = document.getElementById('birthdate')
 const quantityCheck = document.getElementById('quantity')
 const boxCheck = document.getElementById('checkbox1')
 
-
-
-const zoneEmailErrorMsg = document.querySelector('#emailError')
-const zoneBirthErrorMsg = document.querySelector('#birthError')
 const zoneQuantityErrorMsg = document.querySelector('#quantityError')
 const zoneBoxCheckErrorMsg = document.querySelector('#boxCheckError')
 
@@ -59,6 +51,12 @@ const field = form.querySelectorAll('.text-control')
 const formSubmitButton = document.getElementById('formSubmitBtn')
 formSubmitButton.addEventListener('click', function (e) {
 	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
+	console.log('check prénom :', firstValidation())
+	console.log('check nom :', lastValidation())
+	console.log('check email :', emailValidation())
+	console.log('check naissance :', birthValidation())
+	console.log('check quantité :', quantityValidation())
+	// console.log("check prénom :", firstValidation());
 
 	// test du champ prénom //
 	function firstValidation() {
@@ -96,20 +94,29 @@ formSubmitButton.addEventListener('click', function (e) {
 
 	// test du champ email //
 	function emailValidation() {
+		const emailCheck = document.getElementById('email')
+		const zoneEmailErrorMsg = document.querySelector('#emailError')
 		let emailCheckValue = document.getElementById('email').value.trim()
 		const regexEmail =
 			/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/
-		if (emailCheckValue === '' || !emailCheckValue.match(regexEmail)) {
-			console.log('Merci de renseigner un email valide')
+		if (!regexEmail.test(emailCheckValue)) {
+			zoneEmailErrorMsg.innerHTML =
+				'Merci de renseigner une adresse email valide'
+			emailCheck.style.border = '2px solid #e54858'
 			return false
+		} else {
+			zoneEmailErrorMsg.innerHTML = ''
+			emailCheck.style.border = ''
+			return true
 		}
-		console.log('ça roule ! email valide !')
-		return true
 	}
 
+	// test du champ date de naissance si champ vide et si âge requis OK //
 	function birthValidation() {
-		// test du champ date de naissance (si champ vide) //
+		const birthCheck = document.getElementById('birthdate')
+		const zoneBirthErrorMsg = document.querySelector('#birthError')
 		let birthCheckValue = document.getElementById('birthdate').value
+
 		// mise en place d'une vérification d'âge minimum de participation de 15 ans
 
 		const minimumAge = 15
@@ -125,17 +132,22 @@ formSubmitButton.addEventListener('click', function (e) {
 		) {
 			ageInYears--
 		}
-		if (birthCheckValue === null) {
-			console.log('Merci de renseigner votre date de naissance')
+		// test si champ vide //
+		if (birthCheckValue === "") {
+			zoneBirthErrorMsg.innerHTML = 'Merci de renseigner une date de naissance'
+			birthCheck.style.border = '2px solid #e54858'
 			return false
 		}
-		// test du champ date de naissance (si trop jeune pour participer) //
-		else if (ageInYears < minimumAge) {
-			console.log("Désolé, l'âge minimum requis est de 15 ans")
+		// test si trop jeune pour participer //
+		if (ageInYears < minimumAge) {
+			zoneBirthErrorMsg.innerHTML = "Désolé, l'âge minimum requis est de 15 ans"
+			birthCheck.style.border = '2px solid #e54858'
 			return false
+		} else {
+			zoneBirthErrorMsg.innerHTML = ''
+			birthCheck.style.border = ''
+			return true
 		}
-		console.log('ça roule ! tu peux participer !')
-		return true
 	}
 
 	// test du champ quantité doit être un NOMBRE compris entre 0 et 99 //
