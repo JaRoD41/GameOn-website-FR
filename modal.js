@@ -54,7 +54,7 @@ formSubmitButton.addEventListener('click', function (e) {
 		// création d'une constante correspondant aux conditions de validation vérifiées
 		const firstvalid =
 			firstCheckValue.length >= 2 && regexFirstName.test(firstCheckValue)
-		// mise en place d'une condition ternaire pour la validation/style du formulaire	
+		// mise en place d'une condition ternaire pour la validation/style du formulaire
 		zoneFirstErrorMsg.innerHTML = firstvalid
 			? ''
 			: 'Merci de renseigner un prénom valide'
@@ -75,6 +75,7 @@ formSubmitButton.addEventListener('click', function (e) {
 		zoneLastErrorMsg.innerHTML = lastvalid
 			? ''
 			: 'Merci de renseigner un nom valide'
+
 		lastCheck.style.border = lastvalid ? '' : '2px solid #e54858'
 		return lastvalid
 	}
@@ -86,19 +87,55 @@ formSubmitButton.addEventListener('click', function (e) {
 		let emailCheckValue = document.getElementById('email').value.trim()
 		const regexEmail =
 			/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/
-		if (!regexEmail.test(emailCheckValue)) {
-			zoneEmailErrorMsg.innerHTML =
-				'Merci de renseigner une adresse email valide'
-			emailCheck.style.border = '2px solid #e54858'
-			return false
-		} else {
-			zoneEmailErrorMsg.innerHTML = ''
-			emailCheck.style.border = ''
-			return true
-		}
+		const emailvalid = regexEmail.test(emailCheckValue)
+
+		zoneEmailErrorMsg.innerHTML = emailvalid
+			? ''
+			: 'Merci de renseigner une adresse email valide'
+
+		emailCheck.style.border = emailvalid ? '' : '2px solid #e54858'
+		return emailvalid
 	}
 
 	// test du champ date de naissance si champ vide et si âge requis OK //
+	// function birthValidation() {
+	// 	const birthCheck = document.getElementById('birthdate')
+	// 	const zoneBirthErrorMsg = document.querySelector('#birthError')
+	// 	let birthCheckValue = document.getElementById('birthdate').value
+
+	// 	// mise en place d'une vérification d'âge minimum de participation de 15 ans
+
+	// 	const minimumAge = 15
+	// 	const today = new Date()
+	// 	const birthDate = new Date(birthCheckValue)
+	// 	let ageInYears = today.getFullYear() - birthDate.getFullYear()
+
+	// 	if (
+	// 		today.getMonth() < birthDate.getMonth() ||
+	// 		(today.getMonth() == birthDate.getMonth() &&
+	// 			today.getDate() < birthDate.getDate())
+			// si le mois en cours est inférieur au mois de naissance ou que le mois de naissance === mois en cours && le jour actuel < au jour de naissance, alors on diminue le nombre d'années de l'âge de 1
+	// 	) {
+	// 		ageInYears--
+	// 	}
+	// 	// test si champ vide //
+	// 	if (birthCheckValue === '') {
+	// 		zoneBirthErrorMsg.innerHTML = 'Merci de renseigner une date de naissance'
+	// 		birthCheck.style.border = '2px solid #e54858'
+	// 		return false
+	// 	}
+	 	// test si trop jeune pour participer //
+	// 	if (ageInYears < minimumAge) {
+	// 		zoneBirthErrorMsg.innerHTML = "Désolé, l'âge minimum requis est de 15 ans"
+	// 		birthCheck.style.border = '2px solid #e54858'
+	// 		return false
+	// 	} else {
+	// 		zoneBirthErrorMsg.innerHTML = ''
+	// 		birthCheck.style.border = ''
+	// 		return true
+	// 	}
+	// }
+
 	function birthValidation() {
 		const birthCheck = document.getElementById('birthdate')
 		const zoneBirthErrorMsg = document.querySelector('#birthError')
@@ -111,31 +148,31 @@ formSubmitButton.addEventListener('click', function (e) {
 		const birthDate = new Date(birthCheckValue)
 		let ageInYears = today.getFullYear() - birthDate.getFullYear()
 
-		if (
+		// utilisation d'un opérateur ternaire pour remplacer le if/else
+		// si le mois en cours est inférieur au mois de naissance ou que le mois de naissance === mois en cours && le jour actuel < au jour de naissance, alors on diminue le nombre d'années de l'âge de 1
+		ageInYears =
 			today.getMonth() < birthDate.getMonth() ||
 			(today.getMonth() == birthDate.getMonth() &&
 				today.getDate() < birthDate.getDate())
-			// si le mois en cours est inférieur au mois de naissance ou que le mois de naissance === mois en cours && le jour actuel < au jour de naissance, alors on diminue le nombre d'années de l'âge de 1
-		) {
-			ageInYears--
-		}
-		// test si champ vide //
-		if (birthCheckValue === '') {
-			zoneBirthErrorMsg.innerHTML = 'Merci de renseigner une date de naissance'
-			birthCheck.style.border = '2px solid #e54858'
-			return false
-		}
-		// test si trop jeune pour participer //
-		if (ageInYears < minimumAge) {
-			zoneBirthErrorMsg.innerHTML = "Désolé, l'âge minimum requis est de 15 ans"
-			birthCheck.style.border = '2px solid #e54858'
-			return false
-		} else {
-			zoneBirthErrorMsg.innerHTML = ''
-			birthCheck.style.border = ''
-			return true
-		}
+				? ageInYears - 1
+				: ageInYears
+
+		// utilisation d'opérateurs ternaires pour remplacer les if/else
+		// test si champ vide et si trop jeune pour participer //
+		const errorMessage =
+			birthCheckValue === ''
+				? 'Merci de renseigner une date de naissance'
+				: ageInYears < minimumAge
+				? "Désolé, l'âge minimum requis est de 15 ans"
+				: ''
+
+		zoneBirthErrorMsg.innerHTML = errorMessage
+		birthCheck.style.border = errorMessage === '' ? '' : '2px solid #e54858'
+
+		// retourne true si aucun message d'erreur n'est défini, ou false s'il y en a un
+		return errorMessage === ''
 	}
+
 
 	// test du champ quantité doit être un NOMBRE compris entre 0 et 99 //
 	function quantityValidation() {
