@@ -159,27 +159,20 @@ formSubmitButton.addEventListener('click', function (e) {
 		const zoneBoxCheckErrorMsg = document.querySelector('#boxCheckError')
 		const boxCheck = document.querySelector('input[name="location"]:checked')
 
-		if (!boxCheck) {
-			zoneBoxCheckErrorMsg.innerHTML = 'Merci de choisir une ville'
-			return false
-		} else {
-			zoneBoxCheckErrorMsg.innerHTML = ''
-			return true
-		}
+		zoneBoxCheckErrorMsg.innerHTML = boxCheck
+			? ''
+			: 'Merci de choisir une ville'
+		return boxCheck
 	}
 
 	function acceptValidation() {
 		const acceptCheckErrorMsg = document.querySelector('#acceptError')
 		const acceptCheck = document.querySelector('#checkbox1:checked')
 
-		if (!acceptCheck) {
-			acceptCheckErrorMsg.innerHTML =
-				"Merci de lire et accepter les conditions d'utilisation"
-			return false
-		} else {
-			acceptCheckErrorMsg.innerHTML = ''
-			return true
-		}
+		acceptCheckErrorMsg.innerHTML = acceptCheck
+			? ''
+			: "Merci de lire et accepter les conditions d'utilisation"
+		return acceptCheck
 	}
 
 	// fonction pour appeler toutes les fonctions de contrôle créées
