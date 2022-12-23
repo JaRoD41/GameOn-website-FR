@@ -97,45 +97,6 @@ formSubmitButton.addEventListener('click', function (e) {
 		return emailvalid
 	}
 
-	// test du champ date de naissance si champ vide et si âge requis OK //
-	// function birthValidation() {
-	// 	const birthCheck = document.getElementById('birthdate')
-	// 	const zoneBirthErrorMsg = document.querySelector('#birthError')
-	// 	let birthCheckValue = document.getElementById('birthdate').value
-
-	// 	// mise en place d'une vérification d'âge minimum de participation de 15 ans
-
-	// 	const minimumAge = 15
-	// 	const today = new Date()
-	// 	const birthDate = new Date(birthCheckValue)
-	// 	let ageInYears = today.getFullYear() - birthDate.getFullYear()
-
-	// 	if (
-	// 		today.getMonth() < birthDate.getMonth() ||
-	// 		(today.getMonth() == birthDate.getMonth() &&
-	// 			today.getDate() < birthDate.getDate())
-			// si le mois en cours est inférieur au mois de naissance ou que le mois de naissance === mois en cours && le jour actuel < au jour de naissance, alors on diminue le nombre d'années de l'âge de 1
-	// 	) {
-	// 		ageInYears--
-	// 	}
-	// 	// test si champ vide //
-	// 	if (birthCheckValue === '') {
-	// 		zoneBirthErrorMsg.innerHTML = 'Merci de renseigner une date de naissance'
-	// 		birthCheck.style.border = '2px solid #e54858'
-	// 		return false
-	// 	}
-	 	// test si trop jeune pour participer //
-	// 	if (ageInYears < minimumAge) {
-	// 		zoneBirthErrorMsg.innerHTML = "Désolé, l'âge minimum requis est de 15 ans"
-	// 		birthCheck.style.border = '2px solid #e54858'
-	// 		return false
-	// 	} else {
-	// 		zoneBirthErrorMsg.innerHTML = ''
-	// 		birthCheck.style.border = ''
-	// 		return true
-	// 	}
-	// }
-
 	function birthValidation() {
 		const birthCheck = document.getElementById('birthdate')
 		const zoneBirthErrorMsg = document.querySelector('#birthError')
@@ -162,7 +123,8 @@ formSubmitButton.addEventListener('click', function (e) {
 		const errorMessage =
 			birthCheckValue === ''
 				? 'Merci de renseigner une date de naissance'
-				: ageInYears < minimumAge
+				: //si champ vide alors on affiche le message, sinon -> 2eme condition de minimum âge avec message ou non
+				ageInYears < minimumAge
 				? "Désolé, l'âge minimum requis est de 15 ans"
 				: ''
 
@@ -173,28 +135,23 @@ formSubmitButton.addEventListener('click', function (e) {
 		return errorMessage === ''
 	}
 
-
 	// test du champ quantité doit être un NOMBRE compris entre 0 et 99 //
 	function quantityValidation() {
 		let quantityCheckValue = document.getElementById('quantity').value.trim()
 		const quantityCheck = document.getElementById('quantity')
 		const zoneQuantityErrorMsg = document.querySelector('#quantityError')
+		const quantityvalid =
+			quantityCheckValue >= 0 ||
+			quantityCheckValue <= 99 ||
+			isNaN(quantityCheckValue) == false ||
+			quantityCheckValue !== ''
 
-		if (
-			quantityCheckValue < 0 ||
-			quantityCheckValue > 99 ||
-			isNaN(quantityCheckValue) == true ||
-			quantityCheckValue === ''
-		) {
-			zoneQuantityErrorMsg.innerHTML =
-				'Merci de renseigner un nombre compris entre 0 et 99'
-			quantityCheck.style.border = '2px solid #e54858'
-			return false
-		} else {
-			zoneQuantityErrorMsg.innerHTML = ''
-			quantityCheck.style.border = ''
-			return true
-		}
+		zoneQuantityErrorMsg.innerHTML = quantityvalid
+			? ''
+			: 'Merci de renseigner un nombre compris entre 0 et 99'
+
+		quantityCheck.style.border = quantityvalid ? '' : '2px solid #e54858'
+		return quantityvalid
 	}
 
 	// test si une case du choix de la ville est bien cochée //
