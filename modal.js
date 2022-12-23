@@ -38,7 +38,13 @@ const form = document.querySelector('form[name="reserve"]')
 const field = form.querySelectorAll('.text-control')
 // const container = field.closest('.formData')
 
+// écoute du clic sur le bouton COMMANDER //
 
+const formSubmitButton = document.getElementById('formSubmitBtn')
+formSubmitButton.addEventListener('click', function (e) {
+	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
+	areAllValidated() === true ? console.log('tout est validé !') : checkAll()
+})
 
 // test du champ prénom //
 function firstValidation() {
@@ -195,11 +201,3 @@ function areAllValidated() {
 	return false
 }
 
-// écoute du clic sur le bouton COMMANDER //
-
-const formSubmitButton = document.getElementById('formSubmitBtn')
-formSubmitButton.addEventListener('click', function (e) {
-	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
-	areAllValidated() === true ? console.log('tout est validé !') : checkAll()
-	console.log("tout ok ? :", areAllValidated());
-})
