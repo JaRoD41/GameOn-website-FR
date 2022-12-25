@@ -220,7 +220,8 @@ main {
 }
 
 .thanksContainer {
-  margin: 5% auto;
+  padding: 15px 8%;
+  margin: 15px auto;
   width: 100%;
   max-width: 500px;
   animation-name: modalopen;
@@ -230,7 +231,6 @@ main {
   overflow: hidden;
   position: relative;
   color: #fff;
-  padding-top: 10px;
 }
 
 .thanksBody {
