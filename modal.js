@@ -44,6 +44,7 @@ const formSubmitButton = document.getElementById('formSubmitBtn')
 formSubmitButton.addEventListener('click', function (e) {
 	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
 	areAllValidated() === true ? console.log('tout est validé !') : checkAll()
+	console.log('areAllValidated :', areAllValidated());
 })
 
 // test du champ prénom //
@@ -138,15 +139,14 @@ function birthValidation() {
 
 // test du champ quantité doit être un NOMBRE compris entre 0 et 99 //
 function quantityValidation() {
-	let quantityCheckValue = document.getElementById('quantity').value.trim()
+	let quantityCheckValue = document.getElementById('quantity').value
 	const quantityCheck = document.getElementById('quantity')
 	const zoneQuantityErrorMsg = document.querySelector('#quantityError')
 	const quantityvalid =
-		quantityCheckValue >= 0 ||
-		quantityCheckValue <= 99 ||
-		isNaN(quantityCheckValue) == false ||
-		quantityCheckValue !== ''
-
+		quantityCheckValue >= 0 &&
+		quantityCheckValue <= 99 &&
+		quantityCheckValue != ''
+	
 	zoneQuantityErrorMsg.innerHTML = quantityvalid
 		? ''
 		: 'Merci de renseigner un nombre compris entre 0 et 99'
@@ -154,6 +154,7 @@ function quantityValidation() {
 	quantityCheck.style.border = quantityvalid ? '' : '2px solid #e54858'
 	return quantityvalid
 }
+
 
 // test si une case du choix de la ville est bien cochée //
 function boxCheckValidation() {
