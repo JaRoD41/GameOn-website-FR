@@ -54,11 +54,7 @@ thanksCloseCross.forEach((btn) => btn.addEventListener('click', closeThanks)) //
 
 //********************* affichage des messages d'erreur  ***********************************/
 
-// écoute du clic sur le bouton COMMANDER //
 
-const formSubmitButton = document.getElementById('formSubmitBtn')
-formSubmitButton.addEventListener('click', function (e) {
-	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
 
 	// test du champ prénom //
 	function firstValidation() {
@@ -217,6 +213,12 @@ formSubmitButton.addEventListener('click', function (e) {
 		}
 		return false
 	}
+
+	// écoute du clic sur le bouton COMMANDER //
+
+const formSubmitButton = document.getElementById('formSubmitBtn')
+formSubmitButton.addEventListener('click', function (e) {
+	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
 
 	areAllValidated() === true ? openThanks() : checkAll()
 })
