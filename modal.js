@@ -25,8 +25,7 @@ function launchModal() {
 
 // close modal form
 function closeModal() {
-	// modalbg.style.display = 'none' // passage en display:none au clic sur la X
-	modalbg.style.display='none' 
+	modalbg.style.display = 'none' // passage en display:none au clic sur la X
 }
 
 // close modal event
@@ -38,7 +37,7 @@ const thanksCloseBtn = document.querySelectorAll('#thanksBtnClose')
 const thanksCloseCross = document.querySelectorAll('#thanksClose')
 
 function openThanks() {
-	// formElement.reset()
+	formElement.reset()
 	modalbody.style.display = 'none'
 	modalthanks.style.display = 'block'
 }
@@ -50,7 +49,6 @@ function closeThanks() {
 // close thanks page event
 thanksCloseBtn.forEach((btn) => btn.addEventListener('click', closeModal)) // fermeture du formulaire au clic sur le bouton Fermer
 thanksCloseCross.forEach((btn) => btn.addEventListener('click', closeThanks)) // fermeture du formulaire au clic sur la X
-
 
 // Gestion du formulaire et des validations des champs
 
@@ -219,8 +217,6 @@ formSubmitButton.addEventListener('click', function (e) {
 		}
 		return false
 	}
-
-	
 
 	areAllValidated() === true ? openThanks() : checkAll()
 })
