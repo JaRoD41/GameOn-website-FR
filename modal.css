@@ -20,7 +20,7 @@ body {
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
-  margin: 0 auto;
+  margin: 0 100px;
 }
 
 p {
@@ -35,7 +35,7 @@ img {
 
 .topnav {
   overflow: hidden;
-  margin: 3.5%;
+  margin: 3.5% -70px 3.5% 0px;
 }
 
 .header-logo {
@@ -53,11 +53,11 @@ img {
   display: block;
   color: #000000;
   text-align: center;
-  padding: 12px 12px;
+  padding: 12px;
   margin: 5px;
   text-decoration: none;
-  font-size: 20px;
-  font-family: Roboto, sans-serif;
+  font-size: 18px;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .topnav a:hover {
@@ -121,8 +121,8 @@ img {
 
   .header-logo {
     float: left;
-    width: 103px;
-    margin-left: 1rem;
+    width: 115px;
+    /* margin-left: 1rem; */
   }
 }
 
@@ -131,9 +131,9 @@ main {
   font-weight: bolder;
   color: black;
   padding-top: 0.5vw;
-  padding-left: 2vw;
-  padding-right: 2vw;
-  margin: 1px 20px 15px;
+  /* padding-left: 2vw;
+  padding-right: 2vw; */
+  margin: 1px 0px 15px;
   border-radius: 2rem;
   text-align: justify;
 
@@ -373,19 +373,16 @@ input {
 
 .close {
   position: absolute;
-  right: 15px;
-  /* top: 15px; */
-  width: 32px;
-  height: 32px;
+  left: 90%;
+  width: 17px;
+  height: 17px;
   opacity: 1;
   cursor: pointer;
   transform: scale(0.7);
 }
 
 .close:before,
-.close:after,
-#thanksClose:before,
-#thanksClose:after {
+.close:after {
   position: absolute;
   left: 15px;
   content: " ";
@@ -410,7 +407,7 @@ input {
   display: block;
   margin: 0 auto;
   border-radius: 7px;
-  font-size: 1rem;
+  /* font-size: 1rem; */
   padding: 12px 82px;
   color: #fff;
   cursor: pointer;
@@ -534,9 +531,24 @@ input {
   white-space: nowrap;
 }
 
+@media screen and (max-width: 1100px) {
+  .hero-headline {
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .hero-headline {
+    font-size: 60px;
+  }
+}
+
 .hero-text {
   width: 146%;
-  font-weight: normal;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 31px;
   margin-top: 57px;
   padding: 0;
 }
@@ -544,10 +556,16 @@ input {
 .btn-signup {
   outline: none;
   text-transform: capitalize;
-  font-size: 1.3rem;
+  font-size: 25px;
   padding: 15px 23px;
   margin: 0;
   margin-top: 59px;
+}
+
+@media screen and (max-width: 768px) {
+  .btn-signup {
+    font-size: 14px
+  }
 }
 
 .hero-img {
@@ -650,9 +668,13 @@ footer {
 }
 
 @media screen and (max-width: 800px) {
+  body {
+    margin: 0 30px;
+  }
+
   .content {
-      margin: 15% auto;
-    }
+    margin: 15% auto;
+  }
 
   .hero-section {
     display: block;
@@ -700,8 +722,9 @@ footer {
   }
 
   .copyrights {
-    margin-top: 50px;
+    margin-top: 0px;
     text-align: center;
+    font-size: 10px;
   }
 }
 
