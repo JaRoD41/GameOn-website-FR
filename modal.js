@@ -13,7 +13,7 @@ const modalBtn = document.querySelectorAll('.modal-btn')
 const formData = document.querySelectorAll('.formData')
 const closeBtn = document.querySelectorAll('.close') // ajout de la gestion du X pour fermer la modale
 const formElement = document.querySelector('form') // element formulaire du DOM
-
+const modalbody = document.querySelector('.modal-body')
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener('click', launchModal))
@@ -25,20 +25,21 @@ function launchModal() {
 
 // close modal form
 function closeModal() {
-	modalbg.style.display = 'none' // passage en display:none au clic sur la X
+	// modalbg.style.display = 'none' // passage en display:none au clic sur la X
+	modalbg.style.display='none' 
 }
 
 // close modal event
 closeBtn.forEach((btn) => btn.addEventListener('click', closeModal)) // fermeture du formulaire au clic sur le X
 
 // Gestion de la page de remerciements
-const modalthanks = document.querySelector('.thanksBground')
+const modalthanks = document.querySelector('.thanksContainer')
 const thanksCloseBtn = document.querySelectorAll('#thanksBtnClose')
 const thanksCloseCross = document.querySelectorAll('#thanksClose')
 
 function openThanks() {
-	formElement.reset()
-	modalbg.style.display = 'none'
+	// formElement.reset()
+	modalbody.style.display = 'none'
 	modalthanks.style.display = 'block'
 }
 
@@ -47,7 +48,7 @@ function closeThanks() {
 }
 
 // close thanks page event
-thanksCloseBtn.forEach((btn) => btn.addEventListener('click', closeThanks)) // fermeture du formulaire au clic sur le bouton Fermer
+thanksCloseBtn.forEach((btn) => btn.addEventListener('click', closeModal)) // fermeture du formulaire au clic sur le bouton Fermer
 thanksCloseCross.forEach((btn) => btn.addEventListener('click', closeThanks)) // fermeture du formulaire au clic sur la X
 
 

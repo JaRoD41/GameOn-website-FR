@@ -78,7 +78,8 @@
             </div>
             <div class="formData">
               <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-              <input type="number" required class="text-control" id="quantity" placeholder="0 à 99" name="quantity" min="0" max="99">
+              <input type="number" required class="text-control" id="quantity" placeholder="0 à 99" name="quantity"
+                min="0" max="99">
               <span id="quantityError"></span>
             </div>
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
@@ -107,7 +108,7 @@
               <label class="checkbox-label" for="location6">
                 <span class="checkbox-icon"></span>
                 Portland</label>
-                <span id="boxCheckError"></span>
+              <span id="boxCheckError"></span>
             </div>
             <div class="formData">
               <input class="checkbox-input" type="checkbox" id="checkbox1" checked required />
@@ -127,18 +128,18 @@
             <input class="btn-submit" id="formSubmitBtn" type="submit" class="button" value="C'est parti" />
           </form>
         </div>
+        <div class="thanksContainer">
+          <div class="modal-body">
+            <p class="thanksMessage">Merci pour <br />votre inscription</p>
+          </div>
+          <input type="submit" id="thanksBtnClose" class="btn-submit button" value="Fermer" />
+        </div>
       </div>
     </div>
     <!-------- ajout du message de remerciement -------->
-    <div class="thanksBground">
-      <div class="thanksContainer">
-        <span class="close" id="thanksClose"></span>
-        <div class="modal-body">
-          <p class="thanksMessage">Merci pour <br />votre inscription</p>
-        </div>
-        <input type="submit" id="thanksBtnClose" class="btn-submit button" value="Fermer" />
-      </div>
-    </div>
+    <!-- <div class="thanksBground">
+      
+    </div> -->
   </main>
   <footer>
     <p class="copyrights">
