@@ -41,6 +41,7 @@ img {
 @media screen and (max-width: 800px) {
   .topnav {
     margin: 3.5% -15px 3.5% 0px;
+    padding-top: 1rem;
   }
 }
 
@@ -128,6 +129,7 @@ img {
   .header-logo {
     float: left;
     width: 115px;
+    height: 20px;
     /* margin-left: 1rem; */
   }
 }
@@ -209,7 +211,7 @@ main {
   animation-name: modalopen;
   animation-duration: var(--modal-duration);
   background: #232323;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   position: relative;
   color: #fff;
@@ -256,8 +258,10 @@ main {
 
 label {
   font-family: var(--font-default);
-  font-size: 17px;
-  font-weight: normal;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
   display: inline-block;
   margin-bottom: 11px;
 }
@@ -411,8 +415,8 @@ input {
 .btn-signup {
   background: #fe142f;
   display: block;
-  margin: 0 auto;
-  border-radius: 7px;
+  margin: 20px auto 0px;
+  border-radius: 8px;
   /* font-size: 1rem; */
   padding: 12px 82px;
   color: #fff;
@@ -490,17 +494,19 @@ input {
 
 /* custom select end */
 .text-label {
-  font-weight: normal;
-  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
 }
 
 .hero-section {
   /* min-height: 93vh; suppression de cette valeur de hauteur qui déforme la modale en hauteur inutilement */
-  border-radius: 10px;
+  border-radius: 8px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   overflow: hidden;
-  box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.25);
   margin-bottom: 10px;
 }
 
@@ -563,15 +569,9 @@ input {
   outline: none;
   text-transform: capitalize;
   font-size: 25px;
-  padding: 15px 23px;
+  padding: 12px 35px;
   margin: 0;
   margin-top: 59px;
-}
-
-@media screen and (max-width: 768px) {
-  .btn-signup {
-    font-size: 14px
-  }
 }
 
 .hero-img {
@@ -580,11 +580,26 @@ input {
 
 .hero-img img {
   width: 100%;
-  height: 100%;
+  height: 657px;
   display: block;
   padding: 0;
   object-fit: cover;
   /* ajout de l'object-fit:cover pour toujours conserver les proportions de l'image en responsive */
+}
+
+@media screen and (max-width: 768px) {
+  .btn-signup {
+    font-size: 14px
+  }
+
+  .hero-img img {
+    width: 100%;
+    height: 329px;
+  }
+
+  .hero-text {
+    margin-top: 25px;
+  }
 }
 
 #firstError,
@@ -680,6 +695,7 @@ footer {
 
   .content {
     margin: 15% auto;
+    border-radius: 8px 8px 0 0;
   }
 
   .hero-section {
@@ -690,7 +706,8 @@ footer {
   .hero-content {
     background: #fff;
     color: #000;
-    padding: 20px;
+    padding: 3px;
+    min-width: 370px;
   }
 
   .hero-content::after {
@@ -717,8 +734,8 @@ footer {
   }
 
   .hero-img img {
-    border-radius: 10px;
-    margin-top: 40px;
+    border-radius: 8px;
+    margin-top: 20px;
   }
 
   .hero-section>.btn-signup {
