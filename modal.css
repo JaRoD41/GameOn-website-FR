@@ -725,6 +725,7 @@ footer {
     font-weight: 500;
     font-size: 40px;
     line-height: 52px;
+    max-width: 330px;
   }
 
   .hero-text {
@@ -733,6 +734,7 @@ footer {
     font-weight: 400;
     font-size: 13px;
     line-height: 17px;
+    max-width: 330px;
   }
 
   .hero-img img {
@@ -752,6 +754,35 @@ footer {
     font-size: 10px;
   }
 }
+
+@media screen and (max-width: 420px) {
+  .hero-headline {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 52px;
+    max-width: 330px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .hero-headline {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 52px;
+  }
+
+  .hero-text {
+    width: 100%;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 17px;
+    max-width: 305px;
+  }
+}
+
 
 @keyframes modalopen {
   from {
