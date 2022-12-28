@@ -12,3 +12,5 @@ spécialisée dans les conférences et les concours de jeux vidéo.
 
 Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.
 
+Git Pages : https://jarod41.github.io/GameOn-website-FR/ 
+
