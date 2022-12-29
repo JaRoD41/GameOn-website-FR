@@ -1,5 +1,5 @@
 function editNav() {
-	var x = document.getElementById('myTopnav')
+	var x = document.getElementById('myTopnav') // la Nav de la page passe en mode réduit en format mobile
 	if (x.className === 'topnav') {
 		x.className += ' responsive'
 	} else {
@@ -37,7 +37,7 @@ const thanksCloseBtn = document.querySelectorAll('#thanksBtnClose')
 const thanksCloseCross = document.querySelectorAll('#thanksClose')
 
 function openThanks() {
-	formElement.reset()
+	formElement.reset() //remise à zéro du formulaire avant l'ouverture de la fenêtre de remerciements
 	modalbody.style.display = 'none'
 	modalthanks.style.display = 'block'
 }
@@ -176,6 +176,7 @@ function boxCheckValidation() {
 	}
 }
 
+// test si la case d'acceptation des CGU est bien cochée
 function acceptValidation() {
 	const acceptCheckErrorMsg = document.querySelector('#acceptError')
 	const acceptCheck = document.querySelector('#checkbox1:checked')
@@ -197,7 +198,7 @@ function checkAll() {
 	acceptValidation()
 }
 
-// fonction qui vérifie que tous les champs du formulaire sont OK
+// fonction qui vérifie que tous les champs du formulaire sont OK en interrogeant la valeur retournée par chaque fonction 
 function areAllValidated() {
 	if (
 		firstValidation() === true &&
@@ -218,5 +219,5 @@ const formSubmitButton = document.getElementById('formSubmitBtn')
 formSubmitButton.addEventListener('click', function (e) {
 	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
 
-	areAllValidated() === true ? openThanks() : checkAll()
+	areAllValidated() === true ? openThanks() : checkAll() // si tout est validé on ouvre la page de remerciement, sinon on contrôle de nouveau 
 })
