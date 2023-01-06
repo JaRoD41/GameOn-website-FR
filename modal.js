@@ -181,10 +181,14 @@ function acceptValidation() {
 	const acceptCheckErrorMsg = document.querySelector('#acceptError')
 	const acceptCheck = document.querySelector('#checkbox1:checked')
 
-	acceptCheckErrorMsg.innerHTML = acceptCheck
-		? ''
-		: "Merci de lire et accepter les conditions d'utilisation"
-	return acceptCheck
+	if (!acceptCheck) {
+		acceptCheckErrorMsg.innerHTML =
+			"Merci de lire et accepter les conditions d'utilisation"
+		return false
+	} else {
+		acceptCheckErrorMsg.innerHTML = ''
+		return true
+	}
 }
 
 // fonction pour appeler toutes les fonctions de contrôle créées
@@ -198,7 +202,7 @@ function checkAll() {
 	acceptValidation()
 }
 
-// fonction qui vérifie que tous les champs du formulaire sont OK en interrogeant la valeur retournée par chaque fonction 
+// fonction qui vérifie que tous les champs du formulaire sont OK en interrogeant la valeur retournée par chaque fonction
 function areAllValidated() {
 	if (
 		firstValidation() === true &&
@@ -206,7 +210,8 @@ function areAllValidated() {
 		emailValidation() === true &&
 		birthValidation() === true &&
 		quantityValidation() === true &&
-		boxCheckValidation() === true
+		boxCheckValidation() === true &&
+		acceptValidation() === true
 	) {
 		return true
 	}
@@ -219,5 +224,5 @@ const formSubmitButton = document.getElementById('formSubmitBtn')
 formSubmitButton.addEventListener('click', function (e) {
 	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
 
-	areAllValidated() === true ? openThanks() : checkAll() // si tout est validé on ouvre la page de remerciement, sinon on contrôle de nouveau 
+	areAllValidated() === true ? openThanks() : checkAll() // si tout est validé on ouvre la page de remerciement, sinon on contrôle de nouveau
 })
