@@ -21,7 +21,9 @@ modalBtn.addEventListener('click', function () {
 
 // launch modal form
 function launchModal() {
+	modalbody.style.display = 'block'
 	modalbg.style.display = 'block'
+	modalthanks.style.display = 'none'
 }
 
 // close modal form
