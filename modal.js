@@ -9,14 +9,15 @@ function editNav() {
 
 // DOM Elements
 const modalbg = document.querySelector('.bground')
-const modalBtn = document.querySelectorAll('.modal-btn')
-const formData = document.querySelectorAll('.formData')
-const closeBtn = document.querySelectorAll('.close') // ajout de la gestion du X pour fermer la modale
+const modalBtn = document.querySelector('.modal-btn')
+const closeBtn = document.querySelector('.close') // ajout de la gestion du X pour fermer la modale
 const formElement = document.querySelector('form') // element formulaire du DOM
 const modalbody = document.querySelector('.modal-body')
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener('click', launchModal))
+modalBtn.addEventListener('click', function () {
+	launchModal()
+})
 
 // launch modal form
 function launchModal() {
@@ -29,12 +30,14 @@ function closeModal() {
 }
 
 // close modal event
-closeBtn.forEach((btn) => btn.addEventListener('click', closeModal)) // fermeture du formulaire au clic sur le X
+closeBtn.addEventListener('click', function () {
+	closeModal()
+})
 
 // Gestion de la page de remerciements
 const modalthanks = document.querySelector('.thanksContainer')
-const thanksCloseBtn = document.querySelectorAll('#thanksBtnClose')
-const thanksCloseCross = document.querySelectorAll('#thanksClose')
+const thanksCloseBtn = document.querySelector('#thanksBtnClose')
+const thanksCloseCross = document.querySelector('#thanksClose')
 
 function openThanks() {
 	formElement.reset() //remise à zéro du formulaire avant l'ouverture de la fenêtre de remerciements
@@ -47,8 +50,10 @@ function closeThanks() {
 }
 
 // close thanks page event
-thanksCloseBtn.forEach((btn) => btn.addEventListener('click', closeModal)) // fermeture du formulaire au clic sur le bouton Fermer
-thanksCloseCross.forEach((btn) => btn.addEventListener('click', closeThanks)) // fermeture du formulaire au clic sur la X
+
+thanksCloseBtn.addEventListener('click', function () {
+	closeModal()
+}) // fermeture du formulaire au clic sur le bouton Fermer
 
 // Gestion du formulaire et des validations des champs
 
