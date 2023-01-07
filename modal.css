@@ -300,7 +300,7 @@ input {
   opacity: 1;
 }
 
-.formData[data-error-visible="true"] .text-control {
+.redBorderError {
   border: 2px solid #e54858;
 }
 

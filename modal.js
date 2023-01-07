@@ -67,7 +67,9 @@ function firstValidation() {
 	zoneFirstErrorMsg.innerHTML = firstvalid
 		? ''
 		: 'Merci de renseigner un prénom valide'
-	firstCheck.style.border = firstvalid ? '' : '2px solid #e54858'
+	firstvalid
+		? firstCheck.classList.remove('redBorderError')
+		: firstCheck.classList.add('redBorderError')
 	// retourne la valeur de firstvalid true ou false pour la fonction de contrôle final
 	return firstvalid
 }
@@ -85,7 +87,9 @@ function lastValidation() {
 		? ''
 		: 'Merci de renseigner un nom valide'
 
-	lastCheck.style.border = lastvalid ? '' : '2px solid #e54858'
+	lastvalid
+		? lastCheck.classList.remove('redBorderError')
+		: lastCheck.classList.add('redBorderError')
 	return lastvalid
 }
 
@@ -102,7 +106,9 @@ function emailValidation() {
 		? ''
 		: 'Merci de renseigner une adresse email valide'
 
-	emailCheck.style.border = emailvalid ? '' : '2px solid #e54858'
+	emailvalid
+		? emailCheck.classList.remove('redBorderError')
+		: emailCheck.classList.add('redBorderError')
 	return emailvalid
 }
 
@@ -138,7 +144,9 @@ function birthValidation() {
 			: ''
 
 	zoneBirthErrorMsg.innerHTML = errorMessage
-	birthCheck.style.border = errorMessage === '' ? '' : '2px solid #e54858'
+	errorMessage === ''
+		? birthCheck.classList.remove('redBorderError')
+		: birthCheck.classList.add('redBorderError')
 
 	// retourne true si aucun message d'erreur n'est défini, ou false s'il y en a un
 	return errorMessage === ''
@@ -158,7 +166,9 @@ function quantityValidation() {
 		? ''
 		: 'Merci de renseigner un nombre compris entre 0 et 99'
 
-	quantityCheck.style.border = quantityvalid ? '' : '2px solid #e54858'
+	quantityvalid
+		? quantityCheck.classList.remove('redBorderError')
+		: quantityCheck.classList.add('redBorderError')
 	return quantityvalid
 }
 
