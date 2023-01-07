@@ -220,13 +220,13 @@ function checkAll() {
 // fonction qui vérifie que tous les champs du formulaire sont OK en interrogeant la valeur retournée par chaque fonction
 function areAllValidated() {
 	if (
-		firstValidation() === true &&
-		lastValidation() === true &&
-		emailValidation() === true &&
-		birthValidation() === true &&
-		quantityValidation() === true &&
-		boxCheckValidation() === true &&
-		acceptValidation() === true
+		firstValidation() &&
+		lastValidation() &&
+		emailValidation() &&
+		birthValidation() &&
+		quantityValidation() &&
+		boxCheckValidation() &&
+		acceptValidation()
 	) {
 		return true
 	}
@@ -239,5 +239,5 @@ const formSubmitButton = document.getElementById('formSubmitBtn')
 formSubmitButton.addEventListener('click', function (e) {
 	e.preventDefault() // on empeche le formulaire de fonctionner par defaut si aucun contenu
 
-	areAllValidated() === true ? openThanks() : checkAll() // si tout est validé on ouvre la page de remerciement, sinon on contrôle de nouveau
+	areAllValidated() ? openThanks() : checkAll() // si tout est validé on ouvre la page de remerciement, sinon on contrôle de nouveau
 })
